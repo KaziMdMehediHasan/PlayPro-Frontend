@@ -14,7 +14,7 @@ export default function Navbar() {
                 </a>
             </div>
 
-            <nav className="hidden items-center justify-center gap-6 text-sm font-medium md:flex lg:flex text-[16px]">
+            <nav className="hidden items-center justify-center gap-6 text-sm md:flex lg:flex text-[17px]">
                 <a href="#" className="hover:text-pink-500 p-2 rounded-sm">
                     Home
                 </a>

@@ -9,12 +9,11 @@ const ProductCard = () => {
     return (
         <>
             <div className="flex font-poppins items-center justify-center mx-auto my-20 rounded-lg w-fit">
-                <h1 className="font-semibold text-xl lg:text-3xl "><span className="text-pink-400 p-1">Featured</span> <span className="bg-pink-400 text-white p-1 rounded-lg">Products</span></h1>
+                <h1 className="font-semibold text-xl lg:text-3xl "><span className="bg-pink-400 text-white py-1 px-2 rounded-lg">Featured</span> <span className="text-pink-400">Products</span></h1>
             </div>
 
             {/* Grid Section - Starts Here */}
-            <section id="Projects"
-                className="w-fit font-poppins mx-auto grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+            <section className="w-fit font-poppins mx-auto grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-6 md:gap-y-6 gap-x-6 mt-10 mb-5">
 
                 {/*Product card 1 - Starts Here */}
                 <div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl  overflow-hidden">
@@ -31,7 +30,6 @@ const ProductCard = () => {
                                 onChange={(value) => setRating(value)}
                             />
                         </div>
-
                         <p className="text-sm text-gray-500 truncate block capitalize">Product Name</p>
                         <div className="flex items-center">
                             <p className="text-lg font-semibold text-paragraph cursor-auto my-3">$149</p>
