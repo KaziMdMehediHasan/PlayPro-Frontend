@@ -34,50 +34,50 @@ function HeroCarousel() {
     };
 
     return (
-        <div className='min-w-screen h-[400px] md:h-[500px] lg:h-[600px] xl:h-[780px] w-full m-auto px-4 relative group'>
+        <div className='font-poppins min-w-screen h-[400px] md:h-[500px] lg:h-[600px] xl:h-[780px] w-full m-auto px-4 relative group'>
             <div
                 style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-                className='w-full h-full flex justify-around items-center rounded-lg bg-center bg-cover duration-500'
+                className='w-full h-full flex justify-center items-center rounded-lg bg-center bg-cover duration-500'
             >
                 {/* deal heading */}
                 {
-                    currentIndex === 0 && <>
+                    currentIndex === 0 && <div className="flex flex-col  justify-center items-center lg:flex-row lg:items-center lg:justify-center xl:gap-40 lg:gap-20 gap-2">
                         <div className="space-y-4">
-                            <div className="bg-gray-900 bg-opacity-55 flex flex-col justify-center items-center p-11 rounded-lg ">
-                                <h1 className="text-3xl text-white font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+                            <div className="bg-gray-900 backdrop-blur-md md:w-[600px] lg:w-auto bg-opacity-55 flex flex-col justify-center items-center p-11 rounded-lg ">
+                                <h1 className="text-2xl text-white font-bold tracking-tighter md:text-3xl lg:text-5xl/none xl:text-6xl">
                                     Exclusive Discounts
                                 </h1>
-                                <p className="text-yellow-200 md:text-xl">Don't miss out on our limited-time offers!</p>
+                                <p className="text-yellow-200 text-center md:text-xl">Don't miss out on our limited-time offers!</p>
                             </div>
 
                         </div>
-                        <div className="grid grid-cols-2 gap-4 md:w-[700px] px-4">
-                            <div className="bg-pink-600 rounded-lg p-4 flex flex-col items-center justify-center">
-                                <PercentIcon className="h-8 w-8 text-primary-foreground" />
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 lg:grid-cols-2 md:w-[600px] lg:w-auto">
+                            <div className="bg-pink-600 justify-self-center h-24 w-24 md:h-32 md:w-32 xl:w-60 rounded-lg p-4 flex flex-col items-center justify-center">
+                                <PercentIcon className="lg:h-8 lg:w-8 text-white" />
                                 <h3 className="text-2xl font-bold text-primary-foreground">25%</h3>
                                 <p className="text-sm text-primary-foreground">Off Sitewide</p>
                             </div>
-                            <div className="bg-pink-300 rounded-lg p-4 flex flex-col items-center justify-center">
+                            <div className="bg-pink-300 justify-self-center h-24 w-24 md:h-32 md:w-32 xl:w-60 rounded-lg p-4 flex flex-col items-center justify-center">
                                 <GiftIcon className="h-8 w-8 text-secondary-foreground" />
                                 <h3 className="text-2xl font-bold text-secondary-foreground">Free</h3>
                                 <p className="text-sm text-secondary-foreground">Shipping</p>
                             </div>
-                            <div className="bg-pink-100 text-paragraph rounded-lg p-4 flex flex-col items-center justify-center">
+                            <div className="bg-pink-100 justify-self-center h-24 w-24 md:h-32 md:w-32 xl:w-60 text-paragraph rounded-lg p-4 flex flex-col items-center justify-center">
                                 <TagIcon className="h-8 w-8" />
                                 <h3 className="text-2xl font-bold">30%</h3>
                                 <p className="text-sm">Off Accessories</p>
                             </div>
-                            <div className="bg-card text-paragraph rounded-lg p-4 flex flex-col items-center justify-center">
+                            <div className="bg-card justify-self-center h-24 w-24 md:h-32 md:w-32 xl:w-60 text-paragraph rounded-lg p-4 flex flex-col items-center justify-center">
                                 <CodeIcon className="h-8 w-8" />
                                 <h3 className="text-2xl font-bold">$10</h3>
                                 <p className="text-sm">Off First Order</p>
                             </div>
                         </div>
-                    </>
+                    </div>
                 }
                 {
                     currentIndex > 0 && <>
-                        <div className="space-y-4 bg-pink-500 p-8 md:p-12 lg:p-20 rounded-lg bg-opacity-70 animate-fade-in-left">
+                        <div className="space-y-4 bg-pink-500 backdrop-blur-md p-8 md:p-12 lg:p-20 rounded-lg bg-opacity-50 animate-fade-in-left">
                             <h1 className="text-3xl text-white font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
                                 Unbeatable Deals
                             </h1>
