@@ -9,7 +9,8 @@ const ProductCard = () => {
     return (
         <>
             <div className="flex font-poppins items-center justify-center mx-auto my-20 rounded-lg w-fit">
-                <h1 className="font-semibold text-xl lg:text-3xl "><span className="bg-pink-400 text-white py-1 px-2 rounded-lg">Featured</span> <span className="text-pink-400">Products</span></h1>
+                <h1 className="font-semibold text-xl lg:text-3xl ">
+                    <span className="bg-pink-400 text-white py-1 px-2 rounded-lg">Featured</span> <span className="text-pink-400">Products</span></h1>
             </div>
 
             {/* Grid Section - Starts Here */}
@@ -27,6 +28,7 @@ const ProductCard = () => {
                                 count={5}
                                 value={rating}
                                 edit={true}
+                                size={20}
                                 onChange={(value) => setRating(value)}
                             />
                         </div>
