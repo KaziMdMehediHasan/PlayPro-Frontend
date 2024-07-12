@@ -8,11 +8,25 @@ import { MdOutlineReadMore } from "react-icons/md"
 import { BiCartAdd } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import Navbar from "@/components/Navbar/Navbar"
+import { useGetAllProductsQuery } from "@/redux/api/api"
+import { Link } from "react-router-dom"
 
 const Products = () => {
     const [sliderValue, setSliderValue] = useState(50);
     const [filterValue, setFilterValue] = useState('');
     const iterations: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const { data, error, isLoading } = useGetAllProductsQuery({});
+    console.log(data);
+
+
+
+    if (isLoading) {
+        return <h1>Loading</h1>
+    }
+    const productsWithImages = data.data?.filter((product) => product?.image !== "");
+    console.log(productsWithImages)
+
+
     return (
         <>
             <Navbar />
@@ -69,26 +83,26 @@ const Products = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 xl:gap-6 2xl:gap-10 gap-4 md:gap-3">
                         {/*Product card 1 - Starts Here */}
                         {
-                            iterations.map((num) => {
+                            productsWithImages?.map((product) => {
                                 return <>
                                     <div className="w-80 xl:w-72 2xl:w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl overflow-hidden">
-                                        <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Product" className="h-64 w-80 xl:w-72 2xl:w-80 object-cover hover:scale-105 duration-300 rounded-t-xl" />
+                                        <img src={product?.image} alt="Product" className="h-64 w-80 xl:w-72 2xl:w-80 object-cover hover:scale-105 duration-300 rounded-t-xl" />
                                         <div className="px-3 py-4 xl:w-72 2xl:w-80">
-                                            <span className="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+                                            <span className="text-gray-400 mr-3 uppercase text-xs">{product?.brand}</span>
                                             <div className="flex justify-between">
-                                                <p className="text-lg font-semibold text-paragraph truncate block capitalize">Product Name</p>
+                                                <p className="text-lg font-semibold text-paragraph truncate block capitalize">{product?.name}</p>
                                                 <Rating
                                                     count={5}
-                                                    value={5}
+                                                    value={product?.rating}
                                                     size={20}
                                                 />
                                             </div>
-                                            <p className="text-sm text-gray-500 truncate block capitalize">Product Name</p>
+                                            <p className="text-sm text-gray-500 truncate block capitalize">{product?.description}</p>
                                             <div className="flex items-center">
-                                                <p className="text-lg font-semibold text-paragraph cursor-auto my-3">$149</p>
+                                                <p className="text-lg font-semibold text-paragraph cursor-auto my-3">{`$${product?.price}`}</p>
                                                 <p className="text-sm text-gray-600 cursor-auto ml-2 line-through">$199</p>
                                                 <div className="ml-auto flex items-center gap-2">
-                                                    <Button className="border-2 bg-white border-pink-400 hover:text-white hover:bg-pink-500 text-pink-400"><MdOutlineReadMore size={16} /></Button>
+                                                    <Link to={`/products/${product?._id}`}><Button className="border-2 bg-white border-pink-400 hover:text-white hover:bg-pink-500 text-pink-400"><MdOutlineReadMore size={16} /></Button></Link>
                                                     <Button className="border-2 bg-white border-pink-400 hover:text-white hover:bg-pink-500 text-pink-400"><BiCartAdd /></Button>
                                                 </div>
                                             </div>
