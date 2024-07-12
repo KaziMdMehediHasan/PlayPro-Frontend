@@ -41,17 +41,18 @@ function HeroCarousel() {
             >
                 {/* deal heading */}
                 {
-                    currentIndex === 0 && <div className="flex flex-col  justify-center items-center lg:flex-row lg:items-center lg:justify-center xl:gap-40 lg:gap-20 gap-2">
-                        <div className="space-y-4">
-                            <div className="bg-gray-900 backdrop-blur-md md:w-[600px] lg:w-auto bg-opacity-55 flex flex-col justify-center items-center p-11 rounded-lg ">
+                    currentIndex === 0 && <div className="flex flex-col justify-center items-center lg:flex-row lg:items-center lg:justify-center xl:gap-40 lg:gap-20 gap-2">
+                        {/* discount title starts */}
+                        <div className="space-y-4 xl:w-[2/4]">
+                            <div className="bg-gray-900 backdrop-blur-md md:w-[600px] lg:w-auto xl:w-[2/4] bg-opacity-55 flex flex-col justify-center items-start p-11 rounded-lg ">
                                 <h1 className="text-2xl text-white font-bold tracking-tighter md:text-3xl lg:text-5xl/none xl:text-6xl">
                                     Exclusive Discounts
                                 </h1>
-                                <p className="text-yellow-200 text-center md:text-xl">Don't miss out on our limited-time offers!</p>
+                                <p className="text-yellow-200 text-start md:text-xl">Don't miss out on our limited-time offers!</p>
                             </div>
-
                         </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 lg:grid-cols-2 md:w-[600px] lg:w-auto">
+                        {/* discount title starts */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 lg:grid-cols-2 md:w-[600px] lg:w-auto xl:w-2/4">
                             <div className="bg-pink-600 justify-self-center h-24 w-24 md:h-32 md:w-32 xl:w-60 rounded-lg p-4 flex flex-col items-center justify-center">
                                 <PercentIcon className="lg:h-8 lg:w-8 text-white" />
                                 <h3 className="text-2xl font-bold text-primary-foreground">25%</h3>

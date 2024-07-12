@@ -2,7 +2,7 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { SVGProps } from "react"
 import { JSX } from "react/jsx-runtime"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 export default function Navbar() {
     return (
@@ -16,12 +16,12 @@ export default function Navbar() {
             </div>
             {/* navbar menus starts here */}
             <nav className="hidden items-center justify-center gap-6 text-sm md:flex lg:flex text-[17px]">
-                <Link to="/" className="hover:text-pink-500 p-2 rounded-sm">
+                <NavLink to="/" className="hover:text-pink-500 p-2 rounded-sm">
                     Home
-                </Link>
-                <Link to="/products" className="hover:text-pink-500 p-2 rounded-sm">
+                </NavLink>
+                <NavLink to="/products" className="hover:text-pink-500 p-2 rounded-sm">
                     Store
-                </Link>
+                </NavLink>
                 <a href="#" className="hover:text-pink-500 p-2 rounded-sm">
                     Manage Store
                 </a>

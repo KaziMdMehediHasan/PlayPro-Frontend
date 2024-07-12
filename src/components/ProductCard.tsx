@@ -21,10 +21,10 @@ const ProductCard = () => {
                 {/* Product card 1 - Starts Here */}
                 {
                     iterator.map((val, key) => {
-                        return (<div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl overflow-hidden">
+                        return (<div className="w-80 lg:w-72 2xl:w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                                alt="Product" className="h-64 w-80 object-cover hover:scale-105 duration-300 rounded-t-xl" />
-                            <div className="px-3 py-4 w-80">
+                                alt="Product" className="h-64 w-80 lg:w-72 2xl:w-80 object-cover hover:scale-105 duration-300 rounded-t-xl" />
+                            <div className="px-3 py-4 w-80 lg:w-72 2xl:w-80">
                                 <span className="text-gray-400 mr-3 uppercase text-xs">Brand</span>
                                 <div className="flex justify-between">
                                     <p className="text-lg font-semibold text-paragraph truncate block capitalize">Product Name</p>
@@ -41,7 +41,7 @@ const ProductCard = () => {
                                     <p className="text-lg font-semibold text-paragraph cursor-auto my-3">$149</p>
                                     <p className="text-sm text-gray-600 cursor-auto ml-2 line-through">$199</p>
                                     <div className="ml-auto">
-                                        <Link to={`/products/${key}`}><Button className="bg-pink-400 text-white hover:bg-white hover:text-pink-400">View Details<MdOutlineReadMore size={24} /></Button></Link>
+                                        <Link to={`/products/${key}`}><Button size='sm' className="bg-white text-pink-400 hover:bg-pink-400 hover:text-white border-2 border-pink-400">View Details<MdOutlineReadMore size={24} /></Button></Link>
                                     </div>
                                 </div>
                             </div>

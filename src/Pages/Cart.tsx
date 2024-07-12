@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar/Navbar";
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 
@@ -5,6 +6,7 @@ const Cart = () => {
     let [quantity, setQuantity] = useState(0);
     return (
         <>
+            <Navbar />
             <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16 font-poppins">
                 {/* Shopping Cart header section */}
                 <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
