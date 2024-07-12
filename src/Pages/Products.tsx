@@ -7,6 +7,7 @@ import { useState } from "react"
 import { MdOutlineReadMore } from "react-icons/md"
 import { BiCartAdd } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
+import Navbar from "@/components/Navbar/Navbar"
 
 const Products = () => {
     const [sliderValue, setSliderValue] = useState(50);
@@ -14,6 +15,7 @@ const Products = () => {
     const iterations: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     return (
         <>
+            <Navbar />
             <div className="grid grid-cols-1 md:grid-cols-12 font-poppins py-10">
                 {/* left side filter options */}
                 <div className="col-span-4 hidden justify-self-center lg:flex flex-col gap-10">

@@ -2,25 +2,26 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { SVGProps } from "react"
 import { JSX } from "react/jsx-runtime"
+import { Link } from "react-router-dom"
 
 export default function Navbar() {
     return (
         <header className="flex h-16 w-full items-center justify-between bg-gray-50 px-4 md:px-6 font-poppins">
             <div>
-                <a href="#" className="flex items-center gap-2 font-semibold text-2xl">
+                <Link to="/" className="flex items-center gap-2 font-semibold text-2xl">
                     <MountainIcon className="h-7 w-7" />
                     {/* <span className="sr-only">PlayPro</span> */}
                     <p><span className="text-pink-500">Play</span>Pro</p>
-                </a>
+                </Link>
             </div>
-
+            {/* navbar menus starts here */}
             <nav className="hidden items-center justify-center gap-6 text-sm md:flex lg:flex text-[17px]">
-                <a href="#" className="hover:text-pink-500 p-2 rounded-sm">
+                <Link to="/" className="hover:text-pink-500 p-2 rounded-sm">
                     Home
-                </a>
-                <a href="#" className="hover:text-pink-500 p-2 rounded-sm">
+                </Link>
+                <Link to="/products" className="hover:text-pink-500 p-2 rounded-sm">
                     Store
-                </a>
+                </Link>
                 <a href="#" className="hover:text-pink-500 p-2 rounded-sm">
                     Manage Store
                 </a>
@@ -31,6 +32,7 @@ export default function Navbar() {
                     Contact
                 </a>
             </nav>
+            {/* navbar menus starts here */}
             {/* triggers only when screen tablet and mobile view is enabled */}
             <div className="flex items-center gap-4">
                 <Sheet>
@@ -43,21 +45,21 @@ export default function Navbar() {
                     {/* for mobile and tablet devices these icons will show */}
                     <SheetContent side="left" className="lg:hidden">
                         <nav className="grid gap-6 text-lg font-medium">
-                            <a
-                                href="#"
+                            <Link
+                                to="/"
                                 className="flex items-center gap-4 px-2.5 text-paragraph hover:text-pink-500"
                             >
                                 <HomeIcon className="h-5 w-5" />
                                 Home
-                            </a>
-                            <a
-                                href="#"
+                            </Link>
+                            <Link
+                                to="/products"
                                 className="flex items-center gap-4 px-2.5 text-paragraph hover:text-pink-500"
 
                             >
                                 <PackageIcon className="h-5 w-5" />
-                                Products
-                            </a>
+                                Store
+                            </Link>
                             <a
                                 href="#"
                                 className="flex items-center gap-4 px-2.5 text-paragraph hover:text-pink-500"
@@ -78,7 +80,7 @@ export default function Navbar() {
                     </SheetContent>
                 </Sheet>
                 <Button variant="ghost" size="icon" className="rounded-full hover:bg-pink-500 hover:text-white">
-                    <ShoppingCartIcon className="h-6 w-6" />
+                    <Link to='/cart'><ShoppingCartIcon className="h-6 w-6" /></Link>
                     {/* <span className="sr-only">Cart</span> */}
                 </Button>
             </div>
