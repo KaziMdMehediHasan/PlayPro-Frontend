@@ -6,17 +6,8 @@ import { useParams } from 'react-router-dom';
 
 const SingleProductPage = () => {
 
-    // const [images, setImages] = useState({
-    //     img1: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,b_rgb:f5f5f5/3396ee3c-08cc-4ada-baa9-655af12e3120/scarpa-da-running-su-strada-invincible-3-xk5gLh.png",
-    //     img2: "https://static.nike.com/a/images/f_auto,b_rgb:f5f5f5,w_440/e44d151a-e27a-4f7b-8650-68bc2e8cd37e/scarpa-da-running-su-strada-invincible-3-xk5gLh.png",
-    //     img3: "https://static.nike.com/a/images/f_auto,b_rgb:f5f5f5,w_440/44fc74b6-0553-4eef-a0cc-db4f815c9450/scarpa-da-running-su-strada-invincible-3-xk5gLh.png",
-    //     img4: "https://static.nike.com/a/images/f_auto,b_rgb:f5f5f5,w_440/d3eb254d-0901-4158-956a-4610180545e5/scarpa-da-running-su-strada-invincible-3-xk5gLh.png"
-    // })
-
-    // const [activeImg, setActiveImage] = useState(images.img1)
-
     const [amount, setAmount] = useState(1);
-    let { productId } = useParams();
+    const { productId } = useParams();
     const { data, error, isLoading } = useGetSingleProductQuery(productId);
 
     if (isLoading) {
@@ -25,6 +16,17 @@ const SingleProductPage = () => {
 
     console.log(data);
     const { name, stockQuantity, brand, description, productDescription, image, rating, price, category } = data.data;
+
+    // creating a brand name consistency
+    let convertedBrandName = '';
+
+    if (brand.includes('-')) {
+        const temp = brand.replace('-', ' ');
+        convertedBrandName = temp.slice(0, 1).toUpperCase() + temp.slice(1).toLowerCase();
+    } else {
+        convertedBrandName = brand.slice(0, 1).toUpperCase() + brand.slice(1).toLowerCase();
+    }
+    console.log(convertedBrandName);
 
     return (
         <>
@@ -45,7 +47,7 @@ const SingleProductPage = () => {
                         {/* here goes the category */}
                         <span className=' text-pink-400 font-semibold'>{category}</span>
                         {/* brand info */}
-                        <span className=' text-gray-400 font-semibold'>{brand}</span>
+                        <span className=' text-gray-400 font-semibold'>{convertedBrandName}</span>
                         {/* product title */}
                         <h1 className='text-3xl font-semibold'>{name}</h1>
                         {/* mini description goes here */}
@@ -61,7 +63,7 @@ const SingleProductPage = () => {
                     {/* product price */}
                     <h6 className='text-2xl font-semibold'>{`$${price}`}</h6>
                     {/* pick amount button */}
-                    <div className='flex flex-col gap-4 md:flex-row items-start md:gap-12'>
+                    <div className='flex flex-col gap-4 md:flex-row items-center md:gap-12'>
                         <div className='flex flex-row items-center'>
                             <button className='border-2 border-pink-400 shadow-md hover:bg-pink-500 hover:text-white py-1 px-5 rounded-lg text-pink-400 text-3xl' onClick={() => setAmount((prev) => prev - 1)}>-</button>
                             <span className='py-4 px-6 rounded-lg'>{amount}</span>

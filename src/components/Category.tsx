@@ -27,9 +27,9 @@ const Category = () => {
             <section className="w-fit font-poppins mx-auto grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-6 md:gap-y-6 gap-x-6 mt-10 mb-5">
                 {/* card divs start here */}
                 {
-                    categoryImg.map((category) => {
+                    categoryImg.map((category, index) => {
                         return <>
-                            <div className="group relative w-80 lg:w-72 2xl:w-80 h-72 rounded-lg overflow-hidden">
+                            <div key={index} className="group relative w-80 lg:w-72 2xl:w-80 h-72 rounded-lg overflow-hidden">
                                 <img className="w-full h-full object-cover rounded-lg" src={category.img} />
                                 <div className="absolute top-0 left-0 w-full h-0 flex flex-col justify-center items-center bg-gray-600 opacity-0 rounded-lg group-hover:h-full group-hover:opacity-95 duration-500">
                                     <h1 className="text-2xl text-white">{category.name}</h1>

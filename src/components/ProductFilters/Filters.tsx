@@ -1,3 +1,4 @@
+import React from "react";
 import {
     Select,
     SelectContent,
@@ -6,17 +7,22 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-const Filters = ({ setFilterValue }) => {
-    const brands = ['all', 'nike', 'adidas', 'puma', 'rebook', 'new balance', 'lacoste', 'champion', 'wilson', 'yonex']
+type TFilterProps = {
+    setFilterValue: React.Dispatch<React.SetStateAction<string>>;
+    filterArray: string[];
+    title: string;
+}
+
+const Filters = ({ setFilterValue, filterArray, title }: TFilterProps) => {
     return (
         <>
             <Select onValueChange={(e) => setFilterValue(e)} >
                 <SelectTrigger className="w-[180px] border-2 border-pink-400 focus:ring-0">
-                    <SelectValue placeholder="Brand" />
+                    <SelectValue placeholder={title} />
                 </SelectTrigger>
                 <SelectContent >
                     {
-                        brands.map((brand) => <SelectItem value={brand}>{brand.toUpperCase()}</SelectItem>)
+                        filterArray.map((val, index) => <SelectItem key={index} value={val}>{val.toUpperCase()}</SelectItem>)
                     }
                 </SelectContent>
             </Select>

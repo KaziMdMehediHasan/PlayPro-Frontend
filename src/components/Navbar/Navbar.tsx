@@ -3,8 +3,12 @@ import { Button } from "@/components/ui/button"
 import { SVGProps } from "react"
 import { JSX } from "react/jsx-runtime"
 import { Link, NavLink } from "react-router-dom"
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { useAppSelector } from "@/redux/hooks"
 
 export default function Navbar() {
+    const cart = useAppSelector((state) => state.cartItems);
+    console.log(cart);
     return (
         <header className="flex h-16 w-full items-center justify-between bg-gray-50 px-4 md:px-6 font-poppins">
             <div>
@@ -79,10 +83,17 @@ export default function Navbar() {
                         </nav>
                     </SheetContent>
                 </Sheet>
-                <Button variant="ghost" size="icon" className="rounded-full hover:bg-pink-500 hover:text-white">
-                    <Link to='/cart'><ShoppingCartIcon className="h-6 w-6" /></Link>
-                    {/* <span className="sr-only">Cart</span> */}
-                </Button>
+                <div className="relative">
+                    <Button variant="ghost" size="icon" className="rounded-full hover:bg-pink-500 hover:text-white">
+                        <Link to='/cart'><MdOutlineShoppingCart size={30} /></Link>
+                        {/* <span className="sr-only">Cart</span> */}
+                    </Button>
+                    {
+                        cart.length !== 0 && <span className='w-4 h-4 lg:w-5 lg:h-5 text-[12px] top-0 right-0 flex justify-center items-center absolute rounded-full bg-pink-400 text-white'>{cart.length}</span>
+                    }
+
+                </div>
+
             </div>
         </header>
     )
@@ -215,28 +226,6 @@ function PackageIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
             <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
             <path d="m3.3 7 8.7 5 8.7-5" />
             <path d="M12 22V12" />
-        </svg>
-    )
-}
-
-
-function ShoppingCartIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <circle cx="8" cy="21" r="1" />
-            <circle cx="19" cy="21" r="1" />
-            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
         </svg>
     )
 }
