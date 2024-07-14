@@ -2,10 +2,9 @@ import Navbar from "@/components/Navbar/Navbar";
 import { Button } from "@/components/ui/button"
 import { increaseProductCount, decreaseProductCount, removeItem } from "@/redux/Features/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useState } from "react"
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-    let [quantity, setQuantity] = useState(0);
     const cart = useAppSelector((state) => state.cartItems);
     const dispatch = useAppDispatch();
     return (
@@ -49,8 +48,7 @@ const Cart = () => {
                                                     </div>
                                                     {/* product name and info section */}
                                                     <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                                        <a href="#" className="text-base font-medium text-paragraph hover:text-pink-400">{item.name}</a>
-
+                                                        <Link to={`/products/${item.id}`} className="text-base font-medium text-paragraph hover:text-pink-400">{item.name}</Link>
                                                         <div className="flex items-center gap-4">
                                                             <button type="button" className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-pink-400">
                                                                 <svg className="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -216,7 +214,7 @@ const Cart = () => {
                                         <dd className="text-base font-bold text-gray-900 dark:text-white">$8,191.00</dd>
                                     </dl>
                                 </div>
-                                <Button className="bg-pink-400 hover:bg-pink-500 flex w-full items-center justify-center">Place Order</Button>
+                                <Link to="/checkout"><Button className="bg-pink-400 hover:bg-pink-500 flex w-full items-center justify-center">Place Order</Button></Link>
 
                                 <div className="flex items-center justify-center gap-2">
                                     <span className="text-sm font-normal text-gray-500 dark:text-gray-400"> or </span>

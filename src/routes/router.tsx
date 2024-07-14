@@ -1,4 +1,5 @@
 import Cart from "@/Pages/Cart";
+import Checkout from "@/Pages/Checkout";
 import Home from "@/Pages/Home";
 import Products from "@/Pages/Products";
 import SingleProductPage from "@/Pages/SingleProductPage";
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     {
         path: "/cart",
         element: <Cart />
+    },
+    {
+        path: "/checkout",
+        element: <Checkout />
     },
 
 ]);
