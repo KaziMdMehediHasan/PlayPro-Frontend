@@ -1,12 +1,24 @@
 import Navbar from '@/components/Navbar/Navbar';
 import Rating from '@/components/Rating';
 import { useGetSingleProductQuery } from '@/redux/api/api';
+import { increment } from '@/redux/Features/testSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 const SingleProductPage = () => {
 
+    // count slice code
+    const count = useAppSelector((state) => state.counter.value);
+
+    const dispatch = useAppDispatch();
+
+    // count slice code ends
     const [amount, setAmount] = useState(1);
+    const item = {
+        id: amount.toString(),
+        number: amount,
+    };
     const { productId } = useParams();
     const { data, error, isLoading } = useGetSingleProductQuery(productId);
 
@@ -15,7 +27,7 @@ const SingleProductPage = () => {
     }
 
     console.log(data);
-    const { name, stockQuantity, brand, description, productDescription, image, rating, price, category } = data.data;
+    const { _id, name, stockQuantity, brand, description, productDescription, image, rating, price, category } = data.data;
 
     // creating a brand name consistency
     let convertedBrandName = '';
@@ -27,7 +39,7 @@ const SingleProductPage = () => {
         convertedBrandName = brand.slice(0, 1).toUpperCase() + brand.slice(1).toLowerCase();
     }
     console.log(convertedBrandName);
-
+    // creating a brand name consistency ends here
     return (
         <>
             <Navbar />
@@ -65,9 +77,13 @@ const SingleProductPage = () => {
                     {/* pick amount button */}
                     <div className='flex flex-col gap-4 md:flex-row items-center md:gap-12'>
                         <div className='flex flex-row items-center'>
-                            <button className='border-2 border-pink-400 shadow-md hover:bg-pink-500 hover:text-white py-1 px-5 rounded-lg text-pink-400 text-3xl' onClick={() => setAmount((prev) => prev - 1)}>-</button>
-                            <span className='py-4 px-6 rounded-lg'>{amount}</span>
-                            <button className='border-2 border-pink-400 shadow-md hover:bg-pink-500 hover:text-white py-1 px-5 rounded-lg text-pink-400 text-3xl' onClick={() => setAmount((prev) => prev + 1)}>+</button>
+                            <button className='border-2 border-pink-400 shadow-md hover:bg-pink-500 hover:text-white py-1 px-5 rounded-lg text-pink-400 text-3xl' onClick={() => {
+                                setAmount((prev) => prev - 1);
+                            }}>-</button>
+                            <span className='py-4 px-6 w-6 text-2xl flex justify-center'>{amount}</span>
+                            <button className='border-2 border-pink-400 shadow-md hover:bg-pink-500 hover:text-white py-1 px-5 rounded-lg text-pink-400 text-3xl' onClick={() => {
+                                setAmount((prev) => prev + 1);
+                            }}>+</button>
                         </div>
                         <div>
                             <button className='bg-pink-400 shadow-md text-white rounded-lg font-semibold py-3 px-10 h-full hover:bg-pink-500'>Add to Cart</button>

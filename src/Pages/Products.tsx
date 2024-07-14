@@ -18,7 +18,6 @@ const Products = () => {
     const [filterValue, setFilterValue] = useState('');
     const brands = ['all', 'nike', 'adidas', 'puma', 'rebook', 'new balance', 'lacoste', 'champion', 'wilson', 'yonex'];
     const priceSort = ['Low to High', 'High to Low'];
-    const iterations: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     // redux variables
     const { data, error, isLoading } = useGetAllProductsQuery({});
@@ -37,12 +36,14 @@ const Products = () => {
     const productsWithImages = data.data?.filter((product) => product?.image !== "");
     console.log(productsWithImages)
 
-    const handleCartButton = (productName: string, quantity: number, price: number, productImg: string) => {
+    const handleCartButton = (id: string, productName: string, quantity: number, price: number, productImg: string, numberOfTimes: number) => {
         const cartItem: TCartItem = {
+            id: id,
             name: productName,
             quantity: quantity,
             price: price,
-            image: productImg
+            image: productImg,
+            count: numberOfTimes
         }
         dispatch(addItem(cartItem));
     }
@@ -140,7 +141,7 @@ const Products = () => {
                                                 <p className="text-sm text-gray-600 cursor-auto ml-2 line-through">$199</p>
                                                 <div className="ml-auto flex items-center gap-2">
                                                     <Link to={`/products/${product?._id}`}><Button className="border-2 bg-white border-pink-400 hover:text-white hover:bg-pink-500 text-pink-400"><MdOutlineReadMore size={20} /></Button></Link>
-                                                    <Button className="border-2 bg-white border-pink-400 hover:text-white hover:bg-pink-500 text-pink-400" onClick={() => handleCartButton(product?.name, product?.stockQuantity, product?.price, product?.image)}><BiCartAdd size={20} /></Button>
+                                                    <Button className="border-2 bg-white border-pink-400 hover:text-white hover:bg-pink-500 text-pink-400" onClick={() => handleCartButton(product?._id, product?.name, product?.stockQuantity, product?.price, product?.image, 1)}><BiCartAdd size={20} /></Button>
                                                 </div>
                                             </div>
                                             {/* card buttons ends here */}

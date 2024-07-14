@@ -1,11 +1,13 @@
 import Navbar from "@/components/Navbar/Navbar";
 import { Button } from "@/components/ui/button"
-import { useAppSelector } from "@/redux/hooks";
+import { increaseProductCount, decreaseProductCount, removeItem } from "@/redux/Features/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useState } from "react"
 
 const Cart = () => {
     let [quantity, setQuantity] = useState(0);
     const cart = useAppSelector((state) => state.cartItems);
+    const dispatch = useAppDispatch();
     return (
         <>
             <Navbar />
@@ -24,17 +26,22 @@ const Cart = () => {
                                             <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-6">
                                                 <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                                                     <div className="shrink-0 md:order-1">
-                                                        <img className="h-20 w-20" src={item.image} alt={item.name} />
+                                                        <img className="h-24 w-20" src={item.image} alt={item.name} />
                                                     </div>
                                                     <div className="flex items-center justify-between md:order-3 md:justify-end">
                                                         <div className="flex items-center">
                                                             <button className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-white border border-pink-400 hover:bg-pink-500 text-pink-400 hover:text-white"
-                                                                onClick={() => setQuantity(quantity === 0 ? quantity = 0 : quantity = quantity - 1)}>-</button>
+                                                                onClick={() => {
+                                                                    dispatch(decreaseProductCount(item.id));
+                                                                    if (item.count < 1) {
+                                                                        dispatch(removeItem(item.id));
+                                                                    }
+                                                                }}>-</button>
                                                             <div className="w-8 flex justify-center">
-                                                                <p className="text-lg">{item.quantity}</p>
+                                                                <p className="text-lg">{item.count}</p>
                                                             </div>
                                                             <button type="button" id="decrement-button" className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-white border border-pink-400 hover:bg-pink-500 text-pink-400 hover:text-white"
-                                                                onClick={() => setQuantity(quantity += 1)}>+</button>
+                                                                onClick={() => { dispatch(increaseProductCount(item.id)) }}>+</button>
                                                         </div>
                                                         <div className="text-end md:order-4 md:w-32">
                                                             <p className="text-base font-bold text-gray-900 dark:text-white">{`$${item.price}`}</p>
@@ -42,7 +49,7 @@ const Cart = () => {
                                                     </div>
                                                     {/* product name and info section */}
                                                     <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                                        <a href="#" className="text-base font-medium text-paragraph hover:text-pink-400">PC system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24" Retina 4.5K, 8GB, SSD 256GB, 10-core GPU, Keyboard layout INT</a>
+                                                        <a href="#" className="text-base font-medium text-paragraph hover:text-pink-400">{item.name}</a>
 
                                                         <div className="flex items-center gap-4">
                                                             <button type="button" className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-pink-400">
@@ -52,7 +59,7 @@ const Cart = () => {
                                                                 Add to Favorites
                                                             </button>
 
-                                                            <button type="button" className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
+                                                            <button onClick={() => dispatch(removeItem(item.id))} type="button" className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
                                                                 <svg className="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
                                                                 </svg>

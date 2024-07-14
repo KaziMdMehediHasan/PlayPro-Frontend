@@ -8,7 +8,7 @@ import { useAppSelector } from "@/redux/hooks"
 
 export default function Navbar() {
     const cart = useAppSelector((state) => state.cartItems);
-    console.log(cart);
+    // console.log(cart);
     return (
         <header className="flex h-16 w-full items-center justify-between bg-gray-50 px-4 md:px-6 font-poppins">
             <div>
