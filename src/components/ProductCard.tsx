@@ -4,6 +4,7 @@ import { useState } from "react";
 import Rating from "./Rating";
 import { Link } from "react-router-dom";
 import { useGetAllProductsQuery } from "@/redux/api/api";
+import { TProduct } from "@/utils/types";
 
 const ProductCard = () => {
     // const [rating, setRating] = useState(0);
@@ -15,7 +16,7 @@ const ProductCard = () => {
     }
 
     const allProducts = data?.data;
-    const productsWithImages = allProducts?.filter((product) => product?.image !== "")
+    const productsWithImages = allProducts?.filter((product: TProduct) => product?.image !== "")
     return (
         <>
             <div className="flex font-poppins items-center justify-center mx-auto my-20 rounded-lg w-fit">

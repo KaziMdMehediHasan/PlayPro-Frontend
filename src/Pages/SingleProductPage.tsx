@@ -1,19 +1,10 @@
 import Navbar from '@/components/Navbar/Navbar';
 import Rating from '@/components/Rating';
 import { useGetSingleProductQuery } from '@/redux/api/api';
-import { increment } from '@/redux/Features/testSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 const SingleProductPage = () => {
-
-    // count slice code
-    const count = useAppSelector((state) => state.counter.value);
-
-    const dispatch = useAppDispatch();
-
-    // count slice code ends
     const [amount, setAmount] = useState(1);
     const item = {
         id: amount.toString(),
@@ -27,7 +18,7 @@ const SingleProductPage = () => {
     }
 
     console.log(data);
-    const { _id, name, stockQuantity, brand, description, productDescription, image, rating, price, category } = data.data;
+    const { name, stockQuantity, brand, description, productDescription, image, rating, price, category } = data.data;
 
     // creating a brand name consistency
     let convertedBrandName = '';

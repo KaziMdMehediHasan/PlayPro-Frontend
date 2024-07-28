@@ -7,7 +7,30 @@ export const productApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1' }),
     endpoints: (builder) => ({
         getAllProducts: builder.query({
-            query: () => `/products`,
+            query: () => (
+                {
+                    method: "GET",
+                    url: '/products',
+                }
+            ),
+        }),
+        getProductsByFilter: builder.query({
+            query: (filter) => {
+                // logic to handle multiple query filters in a single endpoint
+                let urlRoute = `/products?`;
+                let finalUrl = '';
+                for (const key in filter) {
+                    if (filter[key]) {
+                        urlRoute = urlRoute + `&${[key]}=${filter[key]}`
+                    }
+                }
+                finalUrl = urlRoute.replace('&', '');
+                console.log(finalUrl);
+                return {
+                    method: "GET",
+                    url: finalUrl,
+                }
+            }
         }),
         getSingleProduct: builder.query({
             query: (productId) => `/products/${productId}`,
@@ -17,4 +40,4 @@ export const productApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllProductsQuery, useGetSingleProductQuery } = productApi
+export const { useGetAllProductsQuery, useGetSingleProductQuery, useGetProductsByFilterQuery } = productApi

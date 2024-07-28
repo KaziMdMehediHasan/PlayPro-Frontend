@@ -8,33 +8,53 @@ import { MdOutlineReadMore } from "react-icons/md"
 import { BiCartAdd } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import Navbar from "@/components/Navbar/Navbar"
-import { useGetAllProductsQuery } from "@/redux/api/api"
+import { useGetProductsByFilterQuery } from "@/redux/api/api"
 import { Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { addItem, TCartItem } from "@/redux/Features/cartSlice"
+import { addItem } from "@/redux/Features/cartSlice"
+import { TCartItem, TProduct } from "@/utils/types"
+import { brands, priceSort } from "@/utils/constants"
 
 const Products = () => {
+    const initialFilters: Record<string, unknown> = {
+        searchTerm: "",
+        category: "",
+        brand: "",
+        price: 0,
+        rating: 0,
+    }
+    // all states 
     const [sliderValue, setSliderValue] = useState(50);
     const [filterValue, setFilterValue] = useState('');
-    const brands = ['all', 'nike', 'adidas', 'puma', 'rebook', 'new balance', 'lacoste', 'champion', 'wilson', 'yonex'];
-    const priceSort = ['Low to High', 'High to Low'];
+    const [searchFields, setSearchFields] = useState(initialFilters);
+    // states ends
 
+    // constants end
+    console.log('searchFields:', searchFields);
+    //we will check if query filters are present or not
+    const validSearchFields = () => {
+        for (const field in searchFields) {
+            if (!searchFields[field]) {
+                console.log(`nothing to show`);
+            } else {
+                console.log(field);
+            }
+        }
+    }
+
+    console.log(validSearchFields());
     // redux variables
-    const { data, error, isLoading } = useGetAllProductsQuery({});
+    let { data, error, isLoading } = useGetProductsByFilterQuery(searchFields);
+
     // local redux store
     const cart = useAppSelector((state) => state.cartItems);
+
     const dispatch = useAppDispatch();
 
-    console.log(cart);
-    console.log('Data loaded from server:', data);
-
-    // if no data is available yet then the loader will show
     if (isLoading) {
         return <h1>Loading</h1>
     }
-
-    const productsWithImages = data.data?.filter((product) => product?.image !== "");
-    console.log(productsWithImages)
+    const products = data?.data;
 
     const handleCartButton = (id: string, productName: string, quantity: number, price: number, productImg: string, numberOfTimes: number) => {
         const cartItem: TCartItem = {
@@ -57,14 +77,14 @@ const Products = () => {
                     {/* categories starts here */}
                     <div className="flex flex-col gap-4 cursor-pointer ">
                         <p className="text-xl">Categories</p>
-                        <p className="font-light hover:text-pink-400">Sports Footwear</p>
-                        <p className="font-light hover:text-pink-400">Merchandise</p>
-                        <p className="font-light hover:text-pink-400">Tennis Items</p>
-                        <p className="font-light hover:text-pink-400">Football Items</p>
-                        <p className="font-light hover:text-pink-400">Golf Items</p>
-                        <p className="font-light hover:text-pink-400">Soccer Items</p>
-                        <p className="font-light hover:text-pink-400">Basketball Items</p>
-                    </div>
+                        <p onClick={() => setSearchFields({ ...searchFields, category: 'footwear' })} className="font-light hover:text-pink-400" >Sports Footwear</p>
+                        <p onClick={() => setSearchFields({ ...searchFields, category: 'merchandise' })} className="font-light hover:text-pink-400" >Merchandise</p>
+                        <p onClick={() => setSearchFields({ ...searchFields, category: 'tennis' })} className="font-light hover:text-pink-400" >Tennis Items</p >
+                        <p onClick={() => setSearchFields({ ...searchFields, category: 'football' })} className="font-light hover:text-pink-400" > Football Items</p >
+                        <p onClick={() => setSearchFields({ ...searchFields, category: 'golf' })} className="font-light hover:text-pink-400" > Golf Items</p >
+                        <p onClick={() => setSearchFields({ ...searchFields, category: 'soccer' })} className="font-light hover:text-pink-400" > Soccer Items</p >
+                        <p onClick={() => setSearchFields({ ...searchFields, category: 'basketball' })} className="font-light hover:text-pink-400" > Basketball Items</p >
+                    </div >
                     {/* categories ends here */}
                     {/* filter by brand starts  */}
                     <div className="flex flex-col gap-4">
@@ -97,30 +117,30 @@ const Products = () => {
                         </div>
                     </div>
                     {/* filter buttons ends */}
-                </div>
+                </div >
                 {/* right side products */}
-                <div className="col-span-12 lg:col-span-8 xl:col-span-9 2xl:col-span-8 justify-self-center lg:justify-self-start">
+                < div className="col-span-12 lg:col-span-8 xl:col-span-9 2xl:col-span-8 justify-self-center lg:justify-self-start" >
                     {/* top filters */}
-                    <div className="flex flex-col items-center md:flex-row gap-4 mb-10 justify-center">
+                    < div className="flex flex-col items-center md:flex-row gap-4 mb-10 justify-center" >
                         {/* for smaller screen this sheet will come from the right */}
-                        <div className="lg:hidden">
+                        < div className="lg:hidden" >
                             <MobileSheet />
-                        </div>
+                        </ div>
                         {/* search field and button */}
-                        <div className="flex justify-center items-center gap-2">
+                        < div className="flex justify-center items-center gap-2" >
                             <form className="xl:w-[500px]">
-                                <input placeholder="Search by typing product name" className="border-2 mr-2 rounded-lg py-2 px-4 w-full focus:outline-pink-400 active:border-pink-400" type="text" />
+                                <input onChange={(e) => setSearchFields({ ...searchFields, searchTerm: e.target.value })} placeholder="Search by typing product name" className="border-2 mr-2 rounded-lg py-2 px-4 w-full focus:outline-pink-400 active:border-pink-400" type="text" />
                             </form>
-                            <Button className="bg-pink-400 hover:bg-pink-500"><FiSearch size={20} /></Button>
-                        </div>
+                            <Button onClick={() => setSearchFields({ ...initialFilters })} className="bg-pink-400 hover:bg-pink-500"><FiSearch size={20} /></Button>
+                        </ div>
                         {/* search field and button ends */}
-                    </div>
+                    </div >
                     {/* top filters ends*/}
                     {/* product card container */}
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 xl:gap-6 2xl:gap-10 gap-4 md:gap-3">
                         {/*Product card 1 - Starts Here */}
                         {
-                            productsWithImages?.map((product) => {
+                            products?.map((product: TProduct) => {
                                 return <>
                                     <div key={product?._id} className="w-80 xl:w-72 2xl:w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl overflow-hidden">
                                         <img src={product?.image} alt="Product" className="h-64 w-80 xl:w-72 2xl:w-80 object-cover hover:scale-105 duration-300 rounded-t-xl" />
@@ -153,8 +173,8 @@ const Products = () => {
 
                     </div>
                     {/* product card container ends*/}
-                </div>
-            </div>
+                </div >
+            </div >
         </>
     )
 }
